@@ -19,8 +19,8 @@ ensure:  run handleYtNavigateFinish() when yt-navigate-finish event triggered
   const PLAY_SPEED_LOCAL_STORAGE_KEY = 'greasyfork-org-youtube-config-play-speed';
   const SUBTITLE_LOCAL_STORAGE_KEY = 'greasyfork-org-youtube-config-subtitle';
   const NOT_SUPPORT_LANGUAGE =
-    'Only English and Chinese are supported. \n\nFor users who have signed in youtube, please change the account language to English or Chinese. \n\nFor users who have not signed in youtube, please change the browser language to English or Chinese.';
-  const DEFAULT_SUBTITLES = 'chinese';
+    'Only English, Russian and Chinese are supported. \n\nFor users who have signed in youtube, please change the account language to English or Chinese. \n\nFor users who have not signed in youtube, please change the browser language to English or Chinese.';
+  const DEFAULT_SUBTITLES = 'Русский';
   const TIMER_OF_MENU_LOAD_AFTER_USER_CLICK = 20;
   const TIMER_OF_ELEMENT_LOAD = 100;
   const numbers = '0123456789';
@@ -68,6 +68,9 @@ ensure:  run handleYtNavigateFinish() when yt-navigate-finish event triggered
         case 'en-ZW':
           this.resource = resource.en;
           break;
+        case 'ru-RU':
+          this.resource = resource.ru;
+          break;
         default:
           alert(NOT_SUPPORT_LANGUAGE); // eslint-disable-line no-alert
           this.resource = resource.en;
@@ -101,6 +104,14 @@ ensure:  run handleYtNavigateFinish() when yt-navigate-finish event triggered
         autoTranlate: 'Auto-translate',
         chinese: 'Chinese (Simplified)',
         openTranscript: 'Open transcript',
+        downloadTranscript: 'Download transcript',
+      },
+      ru: {
+        playSpeed: 'Скорость воспроизведения',
+        subtitles: 'Субтитры',
+        autoTranlate: 'Перевод',
+        chinese: 'Русский',
+        openTranscript: 'Субтитры',
         downloadTranscript: 'Download transcript',
       },
       cmnHans: {
@@ -141,7 +152,7 @@ ensure:  run handleYtNavigateFinish() when yt-navigate-finish event triggered
     youtubeConfig();
   }
 
-/**
+  /**
 require:  yt-navigate-finish event on https://www.youtube.com/watch*
 ensure: 
     1. If there isn't subtitle enable button, exit.
